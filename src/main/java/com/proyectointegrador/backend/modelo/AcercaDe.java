@@ -10,12 +10,10 @@ import lombok.Setter;
 
 @Getter @Setter
 @Entity
-public class Skill
+public class AcercaDe 
 {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Integer id; 
-    private String tecnologia;
-    private int nivel;
-
+    private Integer id;
+    private String descripcion;
 }
