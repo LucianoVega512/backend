@@ -1,4 +1,3 @@
-
 package com.proyectointegrador.backend.modelo;
 
 import javax.persistence.Entity;
@@ -8,23 +7,17 @@ import javax.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter @Setter
+@Getter
+@Setter
 @Entity
-public class Proyecto
+public class Proyecto 
 {
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
+    private int usuario_id;
     private String descripcion;
     private String urlImagen;
 
-    public Proyecto()
-    {
-    }
-    
-    public Proyecto(String descripcion, String urlImagen)
-    {
-        this.descripcion = descripcion;
-        this.urlImagen = urlImagen;
-    }
 }
