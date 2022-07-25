@@ -1,7 +1,6 @@
 package com.proyectointegrador.backend.controlador;
 
 import com.proyectointegrador.backend.modelo.Usuario;
-import com.proyectointegrador.backend.repositorio.UsuarioRepositorio;
 import com.proyectointegrador.backend.servicio.UsuarioServicio;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -27,15 +26,18 @@ public class UsuarioControlador {
     private UsuarioServicio usuarioServicio;
 
     @PostMapping("/api/usuario")
-    public Usuario obtenerUsuario(@RequestBody Usuario usuario, HttpServletResponse request) throws IOException {
-        //buscar en bd usr + calve + tkn
-//        Usuario usr = UsuarioRepositorio.obtenerUsuarioPorNombre(usuario.getNombre());
-
+    public Usuario obtenerUsuario(@RequestBody Usuario usuario, HttpServletResponse request) throws IOException 
+    {
+//        System.out.println(usuario);
+        
         Usuario usr = usuarioServicio.obtenerUsuario(usuario.getNombre());
         
-        if (!usr.getNombre().equals("") && usr.getClave().equals(usuario.getClave())) {
+        if (!usr.getNombre().equals("") && usr.getClave().equals(usuario.getClave())) 
+        {
             usr.setToken(generarToken(usuario.getNombre()));
-        } else {
+        } 
+        else 
+        {
             request.sendError(HttpServletResponse.SC_FORBIDDEN);
         }
 
@@ -43,9 +45,9 @@ public class UsuarioControlador {
     }
 
     @GetMapping("/api/valido")
-    public void tokenValido(HttpServletResponse respuesta) {
+    public void tokenValido(HttpServletResponse respuesta) 
+    {
         respuesta.setStatus(HttpServletResponse.SC_ACCEPTED);
-
     }
 
     private String generarToken(String usr) {

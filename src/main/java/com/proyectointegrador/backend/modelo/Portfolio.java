@@ -7,9 +7,15 @@ import lombok.Setter;
 @Getter @Setter
 public class Portfolio
 {
+    private String nombre;
     private List<String> acercaDe;
     private List<String> stack;
     private List<Skill> skills;
     private List<Proyecto> proyectos;   
+
+    @Override
+    public String toString() {
+        return "Portfolio{" + "nombre=" + nombre + ", acercaDe=" + acercaDe + ", stack=" + stack + ", skills=" + skills + ", proyectos=" + proyectos + '}';
+    }
 }
 

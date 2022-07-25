@@ -12,8 +12,22 @@ public class UsuarioServicio implements IUsuarioServicio {
     private UsuarioRepositorio usarioRepositorio;
 
     @Override
-    public Usuario obtenerUsuario(String usuario) {
-        return usarioRepositorio.findAll().stream().filter((p) -> p.getNombre().equals(usuario)).findAny().get();
+    public Usuario obtenerUsuario(String usuario) 
+    {
+        if(usarioRepositorio.findAll().stream().filter((p)->p.getNombre().equals(usuario)).count() > 0){
+            return usarioRepositorio.findAll().stream().filter((p) -> p.getNombre().equals(usuario)).findAny().get();
+        }
+        else
+        {
+            return new Usuario("");
+        }        
     }
+    
+    
 
+    @Override
+    public void guardarUsuario(Usuario usuario) 
+    {
+        usarioRepositorio.save(usuario);
+    }
 }

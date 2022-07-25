@@ -1,6 +1,7 @@
 
 package com.proyectointegrador.backend.modelo;
 
+import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,7 +11,7 @@ import lombok.Setter;
 
 @Getter @Setter
 @Entity
-public class Usuario
+public class Usuario implements Serializable
 {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -18,9 +19,16 @@ public class Usuario
     private String nombre;
     private String clave;
     private String token;
+    private String rol;
 
     public Usuario()
     {
     }
+
+    public Usuario(String nombre) {
+        this.nombre = nombre;
+    }
+    
+    
 
 }

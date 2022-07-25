@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface IStackServicio 
 {
-    public List<Stack> traerStacks();
+    public Stack obtenerStack(int id);    
 }

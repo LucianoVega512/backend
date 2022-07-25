@@ -1,23 +1,23 @@
 
 package com.proyectointegrador.backend.modelo;
 
-import java.util.List;
+import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter @Setter
 @Entity
-public class Skill
+@Table(name = "tarjeta")
+public class Tarjeta implements Serializable 
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Integer id; 
-    private int usuario_id;
-//    private List<String> tecnologias;
-//    private List<Integer> nivel;
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    private String urlImagen;
+    private String descripcion;
 }

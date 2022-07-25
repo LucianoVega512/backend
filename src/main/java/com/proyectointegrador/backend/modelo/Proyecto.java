@@ -1,5 +1,7 @@
 package com.proyectointegrador.backend.modelo;
 
+import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,14 +12,13 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-public class Proyecto 
+public class Proyecto implements Serializable 
 {
-
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
     private int usuario_id;
-    private String descripcion;
-    private String urlImagen;
+//    private List<String> descripciones;
+//    private List<String> urls;
 
 }

@@ -6,5 +6,7 @@ import java.util.List;
 
 public interface IAcercaDeServicio 
 {
-    public List<AcercaDe> traerAcercaDe();
+//    public List<AcercaDe> traerAcercaDe();
+//    public void guardarRegistro(AcercaDe acercaDe);
+    public AcercaDe obtenerAcercaDe(int id);
 }

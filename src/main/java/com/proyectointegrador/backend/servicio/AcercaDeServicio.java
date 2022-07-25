@@ -12,11 +12,9 @@ public class AcercaDeServicio implements IAcercaDeServicio
 {
     @Autowired
     private AcercaDeRepositorio acercaDeRepositorio;
-
-    @Override
-    public List<AcercaDe> traerAcercaDe() 
-    {
-        return acercaDeRepositorio.findAll();
-    }
     
+    @Override
+    public AcercaDe obtenerAcercaDe(int id) {
+        return acercaDeRepositorio.findById(id).orElse(null);
+    }
 }
