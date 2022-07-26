@@ -2,6 +2,7 @@
 package com.proyectointegrador.backend.modelo;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,12 +13,17 @@ import lombok.Setter;
 
 @Getter @Setter
 @Entity
-@Table(name = "tarjeta")
+@Table(name = "TARJETA")
 public class Tarjeta implements Serializable 
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "id")
     private Integer id;
-    private String urlImagen;
+    
+    @Column(name = "url")
+    private String url;
+    
+    @Column(name = "descripcion")
     private String descripcion;
 }

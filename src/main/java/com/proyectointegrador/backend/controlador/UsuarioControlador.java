@@ -25,30 +25,28 @@ public class UsuarioControlador {
     @Autowired
     private UsuarioServicio usuarioServicio;
 
-    @PostMapping("/api/usuario")
-    public Usuario obtenerUsuario(@RequestBody Usuario usuario, HttpServletResponse request) throws IOException 
-    {
-//        System.out.println(usuario);
-        
-        Usuario usr = usuarioServicio.obtenerUsuario(usuario.getNombre());
-        
-        if (!usr.getNombre().equals("") && usr.getClave().equals(usuario.getClave())) 
-        {
-            usr.setToken(generarToken(usuario.getNombre()));
-        } 
-        else 
-        {
-            request.sendError(HttpServletResponse.SC_FORBIDDEN);
-        }
-
-        return usr;
-    }
-
-    @GetMapping("/api/valido")
-    public void tokenValido(HttpServletResponse respuesta) 
-    {
-        respuesta.setStatus(HttpServletResponse.SC_ACCEPTED);
-    }
+//    @PostMapping("/api/usuario")
+//    public Usuario obtenerUsuario(@RequestBody Usuario usuario, HttpServletResponse request) throws IOException 
+//    {
+//        Usuario usr = usuarioServicio.obtenerUsuario(usuario.getNombre());
+//        
+//        if (!usr.getNombre().equals("") && usr.getClave().equals(usuario.getClave())) 
+//        {
+//            usr.setToken(generarToken(usuario.getNombre()));
+//        } 
+//        else 
+//        {
+//            request.sendError(HttpServletResponse.SC_FORBIDDEN);
+//        }
+//
+//        return usr;
+//    }
+//
+//    @GetMapping("/api/valido")
+//    public void tokenValido(HttpServletResponse respuesta) 
+//    {
+//        respuesta.setStatus(HttpServletResponse.SC_ACCEPTED);
+//    }
 
     private String generarToken(String usr) {
         String clave = "Luc1@N0";

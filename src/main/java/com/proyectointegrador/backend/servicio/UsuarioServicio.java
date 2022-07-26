@@ -14,13 +14,7 @@ public class UsuarioServicio implements IUsuarioServicio {
     @Override
     public Usuario obtenerUsuario(String usuario) 
     {
-        if(usarioRepositorio.findAll().stream().filter((p)->p.getNombre().equals(usuario)).count() > 0){
-            return usarioRepositorio.findAll().stream().filter((p) -> p.getNombre().equals(usuario)).findAny().get();
-        }
-        else
-        {
-            return new Usuario("");
-        }        
+        return null;
     }
     
     
