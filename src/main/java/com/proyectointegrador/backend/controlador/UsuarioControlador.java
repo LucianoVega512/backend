@@ -1,7 +1,9 @@
 package com.proyectointegrador.backend.controlador;
 
+import com.proyectointegrador.backend.servicio.ServicioPortafolio;
 import com.proyectointegrador.backend.modelo.Usuario;
-import com.proyectointegrador.backend.servicio.UsuarioServicio;
+import com.proyectointegrador.backend.servicio.ServicioTecnologia;
+import com.proyectointegrador.backend.servicio.ServicioUsuario;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import java.io.IOException;
@@ -11,6 +13,8 @@ import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -23,30 +27,34 @@ import org.springframework.web.bind.annotation.RestController;
 public class UsuarioControlador {
 
     @Autowired
-    private UsuarioServicio usuarioServicio;
+    private ServicioUsuario servicioUsuario;
+    
+//    @Autowired
+//    private ServicioTecnologia servicioTecnologia;
+    
+    @Autowired
+    private ServicioPortafolio portfolio;     
 
-//    @PostMapping("/api/usuario")
-//    public Usuario obtenerUsuario(@RequestBody Usuario usuario, HttpServletResponse request) throws IOException 
-//    {
-//        Usuario usr = usuarioServicio.obtenerUsuario(usuario.getNombre());
-//        
-//        if (!usr.getNombre().equals("") && usr.getClave().equals(usuario.getClave())) 
-//        {
-//            usr.setToken(generarToken(usuario.getNombre()));
-//        } 
-//        else 
-//        {
-//            request.sendError(HttpServletResponse.SC_FORBIDDEN);
-//        }
-//
-//        return usr;
-//    }
-//
-//    @GetMapping("/api/valido")
-//    public void tokenValido(HttpServletResponse respuesta) 
-//    {
-//        respuesta.setStatus(HttpServletResponse.SC_ACCEPTED);
-//    }
+    @PostMapping("/api/usuario")
+    public ResponseEntity<ServicioPortafolio> obtenerUsuario(@RequestBody Usuario usuario) 
+    {
+        String clave = usuario.getClave();
+        String nombre = usuario.getNombreUsuario();
+
+        Usuario _usuario = servicioUsuario.obtenerUsuario(1);
+        
+        if (_usuario.getClave().equals(clave)) 
+        {
+            _usuario.setToken(generarToken(nombre));
+            
+            portfolio.setUsuario(_usuario);
+//            portfolio.setTecnologias(servicioTecnologia.obtenerTecnologias());
+            
+            return new ResponseEntity<>(portfolio, HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>(null, HttpStatus.FORBIDDEN);
+    }
 
     private String generarToken(String usr) {
         String clave = "Luc1@N0";
