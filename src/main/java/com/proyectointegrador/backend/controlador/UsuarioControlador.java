@@ -29,9 +29,6 @@ public class UsuarioControlador {
     @Autowired
     private ServicioUsuario servicioUsuario;
     
-//    @Autowired
-//    private ServicioTecnologia servicioTecnologia;
-    
     @Autowired
     private ServicioPortafolio portfolio;     
 
@@ -48,7 +45,6 @@ public class UsuarioControlador {
             _usuario.setToken(generarToken(nombre));
             
             portfolio.setUsuario(_usuario);
-//            portfolio.setTecnologias(servicioTecnologia.obtenerTecnologias());
             
             return new ResponseEntity<>(portfolio, HttpStatus.OK);
         }
