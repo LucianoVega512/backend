@@ -23,7 +23,7 @@ public class Descripcion implements Serializable
     private Integer id;
     
     @Column(name = "url")
-    private String tipo;
+    private String url;
     
     @Column(name = "descripcion_proyecto")
     private String descripcionProyecto;

@@ -4,10 +4,12 @@ import com.proyectointegrador.backend.modelo.Chip;
 import com.proyectointegrador.backend.modelo.Descripcion;
 import com.proyectointegrador.backend.modelo.Tarjeta;
 import com.proyectointegrador.backend.modelo.Tecnologia;
+import com.proyectointegrador.backend.modelo.Usuario;
 import com.proyectointegrador.backend.servicio.ServicioChip;
 import com.proyectointegrador.backend.servicio.ServicioDescripcion;
 import com.proyectointegrador.backend.servicio.ServicioTarjeta;
 import com.proyectointegrador.backend.servicio.ServicioTecnologia;
+import com.proyectointegrador.backend.servicio.ServicioUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,39 +34,48 @@ public class PortfolioControlador {
     @Autowired
     private ServicioDescripcion servicioDescripcion;
     
+    @Autowired
+    private ServicioUsuario servicioUsuario;
+    
     @DeleteMapping("api/eliminar/chip")
-    public ResponseEntity<String> eliminarChip(@RequestBody Chip chip) 
+    public void eliminarChip(@RequestBody Chip chip) 
     {
         servicioChip.eliminarChip(chip);
-        return new ResponseEntity<>("OK", HttpStatus.OK);
     }
     
     @PostMapping("api/crear/chip")
-    public ResponseEntity<String> crearChip(@RequestBody Chip chip) 
+    public void crearChip(@RequestBody Chip chip) 
     {
         servicioChip.guardarChip(chip);
-        return new ResponseEntity<>("OK", HttpStatus.OK);
     }
     
     @PutMapping("api/modificar/tecnologia")
-    public ResponseEntity<String> modificarTecnologia(@RequestBody Tecnologia tecnologia) 
+    public void modificarTecnologia(@RequestBody Tecnologia tecnologia) 
     {
         servicioTecnologia.guardarTecnologia(tecnologia);
-        return new ResponseEntity<>("OK", HttpStatus.OK);
     }
     
     @PutMapping("api/modificar/tarjeta")
-    public ResponseEntity<String> modificarTarjeta(@RequestBody Tarjeta tarjeta) 
+    public void modificarTarjeta(@RequestBody Tarjeta tarjeta) 
     {
         servicioTarjeta.guardarTarjeta(tarjeta);
-        return new ResponseEntity<>("OK", HttpStatus.OK);
     }
     
     @PutMapping("api/modificar/descripcion")
-    public ResponseEntity<String> modificarDescripcion(@RequestBody Descripcion descripcion) 
+    public void modificarDescripcion(@RequestBody Descripcion descripcion) 
     {
         servicioDescripcion.guardarDescripcion(descripcion);
-        return new ResponseEntity<>("OK", HttpStatus.OK);
     }
     
+    @PutMapping("api/modificar/acerca_de")
+    public void modificarAcercaDe(@RequestBody Usuario usuario) 
+    {
+        int id = usuario.getId();
+        String nombre = usuario.getNombreAcercaDe();
+        
+        Usuario _usuario = servicioUsuario.obtenerUsuario(id);
+        _usuario.setNombreAcercaDe(nombre);
+       
+        servicioUsuario.guardarUsuario(_usuario);
+    }    
 }

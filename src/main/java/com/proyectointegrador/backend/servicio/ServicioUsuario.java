@@ -16,4 +16,12 @@ public class ServicioUsuario implements IUsuarioServicio {
     {
         return usuarioRepositorio.findById(id).orElse(null);
     }
+
+    @Override
+    public void guardarUsuario(Usuario usuario) 
+    {
+        usuarioRepositorio.save(usuario);
+    }
+    
+    
 }
