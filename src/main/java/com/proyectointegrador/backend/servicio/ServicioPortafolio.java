@@ -7,7 +7,6 @@ import com.proyectointegrador.backend.modelo.Tarjeta;
 import com.proyectointegrador.backend.modelo.Tecnologia;
 import com.proyectointegrador.backend.modelo.Usuario;
 import java.util.List;
-import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

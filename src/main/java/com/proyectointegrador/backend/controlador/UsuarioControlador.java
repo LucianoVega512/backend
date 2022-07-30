@@ -1,17 +1,15 @@
 package com.proyectointegrador.backend.controlador;
 
+import com.proyectointegrador.backend.modelo.Administrador;
 import com.proyectointegrador.backend.servicio.ServicioPortafolio;
 import com.proyectointegrador.backend.modelo.Usuario;
-import com.proyectointegrador.backend.servicio.ServicioTecnologia;
+import com.proyectointegrador.backend.servicio.ServicioAdministrador;
 import com.proyectointegrador.backend.servicio.ServicioUsuario;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,7 +29,17 @@ public class UsuarioControlador {
     private ServicioUsuario servicioUsuario;
     
     @Autowired
-    private ServicioPortafolio portfolio;     
+    private ServicioPortafolio portfolio;    
+    
+    @Autowired
+    private ServicioAdministrador servicioAdministrador;
+    
+    @PostMapping("/api/usuario/administrador")
+    public boolean esAdministrador(@RequestBody Administrador administrador)
+    {
+//        Administrador _administrador = servicioAdministrador.obtenerAdministrador(administrador);
+        return servicioAdministrador.obtenerAdministrador(administrador).esAdministrador();
+    }
 
     @PostMapping("/api/usuario")
     public ResponseEntity<ServicioPortafolio> obtenerUsuario(@RequestBody Usuario usuario) 
@@ -40,7 +49,7 @@ public class UsuarioControlador {
 
         Usuario _usuario = servicioUsuario.obtenerUsuario(1);
         
-        if (_usuario.getClave().equals(clave)) 
+        if (_usuario.getClave().equals(clave) && _usuario.getNombreUsuario().equals(nombre)) 
         {
             _usuario.setToken(generarToken(nombre));
             
@@ -51,7 +60,7 @@ public class UsuarioControlador {
 
         return new ResponseEntity<>(null, HttpStatus.FORBIDDEN);
     }
-
+    
     private String generarToken(String usr) {
         String clave = "Luc1@N0";
         List<GrantedAuthority> autoridades = AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_USER");
