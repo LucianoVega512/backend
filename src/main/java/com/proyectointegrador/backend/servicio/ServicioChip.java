@@ -25,9 +25,6 @@ public class ServicioChip
     
     public void guardarChip(Chip chip)
     {
-        int id = entidad.createQuery("SELECT c FROM Chip c ORDER BY c.id DESC", Chip.class)
-                .setMaxResults(1).getSingleResult().getId();
-        chip.setId(++id);
         repositorioChip.save(chip);
     }
     
