@@ -3,6 +3,9 @@ package com.proyectointegrador.backend;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -12,34 +15,15 @@ public class ProyectoIntegradorApplication {
     public static void main(String[] args) {
         SpringApplication.run(ProyectoIntegradorApplication.class, args);
     }
-
-//    @Bean
-//    public WebMvcConfigurer corsConfigurer() {
-//        return new WebMvcConfigurer() {
-//            @Override
-//            public void addCorsMappings(CorsRegistry registry) {
-//                        registry.addMapping("/api/*")
-//                                .allowedOrigins("*")
-//                                .allowedMethods("GET", "POST", "PUT", "DELETE")
-//                                .maxAge(3600);
-//                }
-//        };
-//    }
-    
-    /*
     @Bean
-public WebMvcConfigurer corsConfigurer() {
-        return new WebMvcConfigurer() {
-                @Override
-                public void addCorsMappings(CorsRegistry registry) {
-                        registry.addMapping(“/producto/**”)
-                                .allowedOrigins(“http://localhost:9001”)
-                                .allowedMethods(“GET”, “POST”, “PUT”, “DELETE”)
-                                .maxAge(3600);
-                }
-
-        };
-}
-    */
+    public CorsFilter corsFilter() {
+        final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        final CorsConfiguration config = new CorsConfiguration();
+        config.addAllowedOrigin("*");
+        config.addAllowedHeader("*");
+        config.addAllowedMethod("*");
+        source.registerCorsConfiguration("/**", config);
+        return new CorsFilter(source);
+    }
 
 }

@@ -26,16 +26,7 @@ public class ConfiguracionSeguridad extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated();
     }
     
-    @Bean
-    public CorsFilter corsFilter() {
-        final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        final CorsConfiguration config = new CorsConfiguration();
-        config.addAllowedOrigin("*");
-        config.addAllowedHeader("*");
-        config.addAllowedMethod("*");
-        source.registerCorsConfiguration("/**", config);
-        return new CorsFilter(source);
-    }
+    
     
 //    @Bean
 //    public WebMvcConfigurer corsConfigurer() {
