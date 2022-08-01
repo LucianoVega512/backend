@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -41,27 +40,23 @@ public class UsuarioControlador {
     }
 
     @CrossOrigin(origins = "*")
-    @GetMapping("/api/usuario")
-    public String pruebaGet(){
-        return "{\"mensajes\":\"respuesta GET\"}";
+    @PostMapping("/api/usuario")
+    public ResponseEntity<ServicioPortafolio> obtenerUsuario(@RequestBody Usuario usuario) {
+        String clave = usuario.getClave();
+        String nombre = usuario.getNombreUsuario();
+
+        Usuario _usuario = servicioUsuario.obtenerUsuario(1);
+
+        if (_usuario.getClave().equals(clave) && _usuario.getNombreUsuario().equals(nombre)) {
+            _usuario.setToken(generarToken(nombre));
+
+            portfolio.setUsuario(_usuario);
+
+            return new ResponseEntity<>(portfolio, HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>(null, HttpStatus.FORBIDDEN);
     }
-//    @PostMapping("/api/usuario")
-//    public ResponseEntity<ServicioPortafolio> obtenerUsuario(@RequestBody Usuario usuario) {
-//        String clave = usuario.getClave();
-//        String nombre = usuario.getNombreUsuario();
-//
-//        Usuario _usuario = servicioUsuario.obtenerUsuario(1);
-//
-//        if (_usuario.getClave().equals(clave) && _usuario.getNombreUsuario().equals(nombre)) {
-//            _usuario.setToken(generarToken(nombre));
-//
-//            portfolio.setUsuario(_usuario);
-//
-//            return new ResponseEntity<>(portfolio, HttpStatus.OK);
-//        }
-//
-//        return new ResponseEntity<>(null, HttpStatus.FORBIDDEN);
-//    }
 
     private String generarToken(String usr) {
         String clave = "Luc1@N0";

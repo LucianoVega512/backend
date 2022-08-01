@@ -16,8 +16,7 @@ public class ConfiguracionSeguridad extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                 .addFilterAfter(new FiltroSeguridad(), UsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests()
-//                .antMatchers(HttpMethod.POST, "/api/usuario").permitAll()
-                .antMatchers(HttpMethod.GET, "/api/usuario").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/usuario").permitAll()
                 .anyRequest().authenticated();
     }
 }
