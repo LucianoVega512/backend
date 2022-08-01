@@ -27,40 +27,38 @@ public class UsuarioControlador {
 
     @Autowired
     private ServicioUsuario servicioUsuario;
-    
+
     @Autowired
-    private ServicioPortafolio portfolio;    
-    
+    private ServicioPortafolio portfolio;
+
     @Autowired
     private ServicioAdministrador servicioAdministrador;
-    
+
     @PostMapping("/api/usuario/administrador")
-    public boolean esAdministrador(@RequestBody Administrador administrador)
-    {
+    public boolean esAdministrador(@RequestBody Administrador administrador) {
         return servicioAdministrador.obtenerAdministrador(administrador).esAdministrador();
     }
 
     @CrossOrigin(origins = "https://still-spire-76335.herokuapp.com")
     @PostMapping("/api/usuario")
-    public ResponseEntity<ServicioPortafolio> obtenerUsuario(@RequestBody Usuario usuario) 
-    {
+    public ResponseEntity<ServicioPortafolio> obtenerUsuario(@RequestBody Usuario usuario) {
         String clave = usuario.getClave();
         String nombre = usuario.getNombreUsuario();
 
         Usuario _usuario = servicioUsuario.obtenerUsuario(1);
-        
-        if (_usuario.getClave().equals(clave) && _usuario.getNombreUsuario().equals(nombre)) 
-        {
+
+        if (_usuario.getClave().equals(clave) && _usuario.getNombreUsuario().equals(nombre)) {
             _usuario.setToken(generarToken(nombre));
-            
+
             portfolio.setUsuario(_usuario);
-            
+
+//            return new ResponseEntity<>(portfolio, HttpStatus.OK);
             return new ResponseEntity<>(portfolio, HttpStatus.OK);
         }
 
         return new ResponseEntity<>(null, HttpStatus.FORBIDDEN);
     }
-    
+
     private String generarToken(String usr) {
         String clave = "Luc1@N0";
         List<GrantedAuthority> autoridades = AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_USER");
