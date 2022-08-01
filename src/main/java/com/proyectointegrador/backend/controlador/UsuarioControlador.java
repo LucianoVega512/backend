@@ -43,7 +43,7 @@ public class UsuarioControlador {
     @CrossOrigin(origins = "*")
     @GetMapping("/api/usuario")
     public String pruebaGet(){
-        return "Respuesta GET";
+        return "{\"mensajes\":\"respuesta GET\"";
     }
 //    @PostMapping("/api/usuario")
 //    public ResponseEntity<ServicioPortafolio> obtenerUsuario(@RequestBody Usuario usuario) {
