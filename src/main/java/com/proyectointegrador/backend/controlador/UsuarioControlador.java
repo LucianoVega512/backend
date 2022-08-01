@@ -53,7 +53,7 @@ public class UsuarioControlador {
             portfolio.setUsuario(_usuario);
 
 //            return new ResponseEntity<>(portfolio, HttpStatus.OK);
-            return new ResponseEntity<>(portfolio, HttpStatus.OK);
+            return new ResponseEntity<>(null, HttpStatus.OK);
         }
 
         return new ResponseEntity<>(null, HttpStatus.FORBIDDEN);
