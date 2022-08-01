@@ -13,7 +13,7 @@ public class ConfiguracionSeguridad extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable()
+        http.csrf().disable().cors().disable()
                 .addFilterAfter(new FiltroSeguridad(), UsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/api/usuario").permitAll()
