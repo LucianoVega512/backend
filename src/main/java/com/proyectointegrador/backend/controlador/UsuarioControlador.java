@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -40,24 +41,27 @@ public class UsuarioControlador {
     }
 
     @CrossOrigin(origins = "https://still-spire-76335.herokuapp.com")
-    @PostMapping("/api/usuario")
-    public ResponseEntity<ServicioPortafolio> obtenerUsuario(@RequestBody Usuario usuario) {
-        String clave = usuario.getClave();
-        String nombre = usuario.getNombreUsuario();
-
-        Usuario _usuario = servicioUsuario.obtenerUsuario(1);
-
-        if (_usuario.getClave().equals(clave) && _usuario.getNombreUsuario().equals(nombre)) {
-            _usuario.setToken(generarToken(nombre));
-
-            portfolio.setUsuario(_usuario);
-
-//            return new ResponseEntity<>(portfolio, HttpStatus.OK);
-            return new ResponseEntity<>(null, HttpStatus.OK);
-        }
-
-        return new ResponseEntity<>(null, HttpStatus.FORBIDDEN);
+    @GetMapping("/api/usuario")
+    public String pruebaGet(){
+        return "Respuesta GET";
     }
+//    @PostMapping("/api/usuario")
+//    public ResponseEntity<ServicioPortafolio> obtenerUsuario(@RequestBody Usuario usuario) {
+//        String clave = usuario.getClave();
+//        String nombre = usuario.getNombreUsuario();
+//
+//        Usuario _usuario = servicioUsuario.obtenerUsuario(1);
+//
+//        if (_usuario.getClave().equals(clave) && _usuario.getNombreUsuario().equals(nombre)) {
+//            _usuario.setToken(generarToken(nombre));
+//
+//            portfolio.setUsuario(_usuario);
+//
+//            return new ResponseEntity<>(portfolio, HttpStatus.OK);
+//        }
+//
+//        return new ResponseEntity<>(null, HttpStatus.FORBIDDEN);
+//    }
 
     private String generarToken(String usr) {
         String clave = "Luc1@N0";
