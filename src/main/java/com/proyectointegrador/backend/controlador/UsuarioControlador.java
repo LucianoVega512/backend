@@ -39,8 +39,9 @@ public class UsuarioControlador {
         return servicioAdministrador.obtenerAdministrador(administrador).esAdministrador();
     }
 
-//    @CrossOrigin(origins = "http://localhost:8080")
-    @PostMapping("/api/usuario")
+    @CrossOrigin(origins = "*")
+//    @PostMapping("/api/usuario")
+    @PostMapping("https://still-spire-76335.herokuapp.com/api/usuario")
     public ResponseEntity<ServicioPortafolio> obtenerUsuario(@RequestBody Usuario usuario) {
         String clave = usuario.getClave();
         String nombre = usuario.getNombreUsuario();
