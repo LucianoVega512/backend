@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@CrossOrigin(origins = "*", methods = {RequestMethod.PUT, RequestMethod.POST})
 public class UsuarioControlador {
 
     @Autowired
@@ -41,6 +40,7 @@ public class UsuarioControlador {
         return servicioAdministrador.obtenerAdministrador(administrador).esAdministrador();
     }
 
+    @CrossOrigin(origins = "https://still-spire-76335.herokuapp.com")
     @PostMapping("/api/usuario")
     public ResponseEntity<ServicioPortafolio> obtenerUsuario(@RequestBody Usuario usuario) 
     {
