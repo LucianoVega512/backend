@@ -17,7 +17,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,9 +38,8 @@ public class UsuarioControlador {
         return servicioAdministrador.obtenerAdministrador(administrador).esAdministrador();
     }
 
-    @CrossOrigin(origins = "*")
-//    @PostMapping("/api/usuario")
-    @PostMapping("https://still-spire-76335.herokuapp.com/api/usuario")
+//    @CrossOrigin(origins = "*")
+    @PostMapping("/api/usuario")
     public ResponseEntity<ServicioPortafolio> obtenerUsuario(@RequestBody Usuario usuario) {
         String clave = usuario.getClave();
         String nombre = usuario.getNombreUsuario();
