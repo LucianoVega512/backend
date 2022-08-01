@@ -16,7 +16,6 @@ import org.springframework.http.ResponseEntity;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,8 +36,7 @@ public class UsuarioControlador {
     public boolean esAdministrador(@RequestBody Administrador administrador) {
         return servicioAdministrador.obtenerAdministrador(administrador).esAdministrador();
     }
-
-//    @CrossOrigin(origins = "*")
+    
     @PostMapping("/api/usuario")
     public ResponseEntity<ServicioPortafolio> obtenerUsuario(@RequestBody Usuario usuario) {
         String clave = usuario.getClave();
