@@ -40,7 +40,7 @@ public class UsuarioControlador {
         return servicioAdministrador.obtenerAdministrador(administrador).esAdministrador();
     }
 
-    @CrossOrigin(origins = "https://still-spire-76335.herokuapp.com")
+    @CrossOrigin(origins = "*")
     @GetMapping("/api/usuario")
     public String pruebaGet(){
         return "Respuesta GET";
