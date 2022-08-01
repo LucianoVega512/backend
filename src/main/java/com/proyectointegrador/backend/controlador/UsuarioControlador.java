@@ -39,7 +39,7 @@ public class UsuarioControlador {
         return servicioAdministrador.obtenerAdministrador(administrador).esAdministrador();
     }
 
-    @CrossOrigin(origins = "http://localhost:8080")
+//    @CrossOrigin(origins = "http://localhost:8080")
     @PostMapping("/api/usuario")
     public ResponseEntity<ServicioPortafolio> obtenerUsuario(@RequestBody Usuario usuario) {
         String clave = usuario.getClave();
